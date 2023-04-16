@@ -49,7 +49,7 @@ logger = logging.getLogger(__name__)
 
 global report1
 report1 = Document()
-report1.add_heading('All Tags in each document', 0) #create word document
+report1.add_heading('Tables for Tags in each document', 0) #create word document
 global paragraph0 
 paragraph0 = report1.add_paragraph()
 report1.save('ChildandParentTagsTables.docx')
@@ -57,7 +57,7 @@ report1.save('ChildandParentTagsTables.docx')
 
 global report3
 report3 = Document()
-report3.add_heading('Report', 0) #create word document
+report3.add_heading('Parent and Child Relation Report', 0) #create word document
 global paragraph 
 paragraph = report3.add_paragraph()
 report3.save('AllChildandParentTags.docx')
@@ -983,13 +983,17 @@ def generateReport2():
         Gui.Txt.insert(tk.END, msg10) #print in GUI
         report3.save('AllChildandParentTags.docx')
         toggle_state() #This will enable the getDoc button
+        Gui.genRep.config(state="disabled") # This will disable the generate report button
         TBVReport.save('TBVReport.docx') # saves the TBV report
         toggle_state3() # this will re-enable excel report button
         #toggle_state5() # This will enable the generate orphan report button
         toggle_state7() #This will enable the getChildless document button
-        orphanGenReport()
         toggle_state9() # This will enable the get TBV button
         toggle_state10() # This will enable the get TBD button
+        toggle_state8() # This will enable the getExcel2 report button
+        toggle_state11() # This will enable the guiTree View button
+        orphanGenReport()
+
 
         
     except Exception as e:
@@ -1013,6 +1017,7 @@ def generateReport2():
 def orphanGenReport():
     duplicates = []
     try:
+        """
         # declaring counters
         m = 0
         k = 0
@@ -1035,7 +1040,8 @@ def orphanGenReport():
                         #report3.add_paragraph("\n")
                         stringKey = str(key)
                         stringKey2 = (stringKey.replace(' ', ''))
-                        text = dicts10[str(stringKey2)]
+                        if stringKey2 in dicts10:
+                            text = dicts10[str(stringKey2)]
                         
 
                         if isinstance(text, list):
@@ -1195,6 +1201,7 @@ def orphanGenReport():
         #orphanss.sort() # sorts the list of orphan tags
         #orphanChildren2Copy.sort() # sorts the list of orphan child tags
         
+        """
         
         #for orph in orphanss:
         #    orphanReport.add_paragraph(orph)
@@ -1203,10 +1210,7 @@ def orphanGenReport():
             orphanReport.add_paragraph(orph5)
 
         orphanReport.save('orphanReport.docx')
-        toggle_state() #This will enable the getDoc button
         toggle_state4() # This will enable the open orphan report button
-        toggle_state8() # This will enable the getExcel2 report button
-        toggle_state13() # This will enable the guiTree View button
         return dicts2Copy
 
     except Exception as e:
@@ -1378,7 +1382,7 @@ def createExcel():
         
         wb = xw.Book()
         excelReport = wb.sheets[0]
-        excelReport.name = "Report"
+        excelReport.name = "Tags and Requirements Report"
 
         # creating a Dataframe object from a list
         # of tuples of key, value pair
@@ -1459,19 +1463,19 @@ def createExcel():
         excelReport.range("J1").value = 'Childless Tags'
         excelReport.range("J1").font.Size = 14 # Change font size
         excelReport.range("J1").font.ColorIndex = 2 # Change font color
-        excelReport.range('J1:J1').color = (150, 75, 0) # Change cell background color
+        excelReport.range('J1:J1').color = (239, 122, 231) # Change cell background color
 
         # Adding TBVTags header
         excelReport.range("L1").value = 'TBV Tags'
         excelReport.range("L1").font.Size = 14 # Change font size
         excelReport.range("L1").font.ColorIndex = 2 # Change font color
-        excelReport.range('L1:L1').color = (150, 75, 0) # Change cell background color
+        excelReport.range('L1:L1').color = (102, 255, 255) # Change cell background color
 
         # Adding TBDTags header
         excelReport.range("N1").value = 'TBD Tags'
         excelReport.range("N1").font.Size = 14 # Change font size
         excelReport.range("N1").font.ColorIndex = 2 # Change font color
-        excelReport.range('N1:N1').color = (150, 75, 0) # Change cell background color
+        excelReport.range('N1:N1').color = (255, 255, 102) # Change cell background color
         
         
         excelReport.autofit()
@@ -1479,109 +1483,6 @@ def createExcel():
         for key in dicts2:
             wb.sheets[0].append([key, dicts2[key]])
         wb.save('Tags&Requirements.xlsx') # Saving excel report as 'Tags&Requirements.xlsx'
-
-"""
-# Creates an excel report
-def createExcel2():
-    try:
-        # book_arr = xw.App().books.add()
-        # wb = book_arr.add()
-        # wb.title = "Report"
-        
-        
-        
-        # excelReport = wb.sheets.add("Report")
-
-        #excelReport.name = report
-        excelReport2.range("B1").value = "Children"
-        excelReport2.range("B1").font.Size = 18 # Change font size
-        excelReport2.range("B1").font.ColorIndex = 2 # Change font color
-        excelReport2.range('B1:B1').color = (255, 0, 0) # Change cell background color
-
-        excelReport2.range("A1").value = 'Parents'
-        excelReport2.range("A1").font.Size = 18 # Change font size
-        excelReport2.range("A1").font.ColorIndex = 2 # Change font color
-        excelReport2.range('A1:A1').color = (0, 0, 255) # Change cell background color
-
-
-
-        # For Orphan Tags
-        df3 = pd.DataFrame(orphanChildren2Copy)
-
-        # For Childless Tags
-        df4 = pd.DataFrame(childless)
-
-        # For TBV Tags
-        df5 = pd.DataFrame(TBVTags)
-
-        # For TBD Tags
-        df6 = pd.DataFrame(TBDTags)
-        
-        
-
-
-        # Select the range with the dataframe
-        #data_range = ws.range('A1').expand()
-        # Drop the indexes
-        #data_range.options(index=False).value
-
-        # Listing out the Orphan Tags
-        excelReport2.range("H1").value = df3
-        df3 = df3.reset_index(drop=True)
-
-        # Listing out the Childless Tags
-        excelReport2.range("K1").value = df4
-        df4 = df4.reset_index(drop=True)
-
-        # Listing out the TBV Tags
-        excelReport2.range("N1").value = df5
-        df5 = df5.reset_index(drop=True)
-
-        # Listing out the TBD Tags
-        excelReport2.range("Q1").value = df6
-        df6 = df6.reset_index(drop=True)
-        
-
-        
-        # Adding OrphanTags header
-        excelReport2.range("I1").value = 'Orphan Tags'
-        excelReport2.range("I1").font.Size = 14 # Change font size
-        excelReport2.range("I1").font.ColorIndex = 2 # Change font color
-        excelReport2.range('I1:I1').color = (255, 128, 0) # Change cell background color
-
-        # Adding ChildlessTags header
-        excelReport2.range("L1").value = 'Childless Tags'
-        excelReport2.range("L1").font.Size = 14 # Change font size
-        excelReport2.range("L1").font.ColorIndex = 2 # Change font color
-        excelReport2.range('L1:L1').color = (150, 75, 0) # Change cell background color
-
-        # Adding TBVTags header
-        excelReport2.range("O1").value = 'TBV Tags'
-        excelReport2.range("O1").font.Size = 14 # Change font size
-        excelReport2.range("O1").font.ColorIndex = 2 # Change font color
-        excelReport2.range('O1:O1').color = (150, 75, 0) # Change cell background color
-
-        # Adding TBDTags header
-        excelReport2.range("R1").value = 'TBD Tags'
-        excelReport2.range("R1").font.Size = 14 # Change font size
-        excelReport2.range("R1").font.ColorIndex = 2 # Change font color
-        excelReport2.range('R1:R1').color = (150, 75, 0) # Change cell background color
-        
-
-        
-        
-        excelReport2.autofit()
-
-
-
-        wb2.save('AllTags.xlsx') # Saving excel report as 'AllTags.xlsx'
-    except Exception as e:
-        # Log an error message
-        logging.error('createExcel2(): ERROR', exc_info=True)
-    else:
-        # Log a success message
-        logging.info('createExcel2(): PASS')
-"""
 
 def toggle_state(): # this will re-enable getDoc button
     Gui.getDoc.config(state="normal")
@@ -1613,7 +1514,7 @@ def toggle_state9(): # this will re-enable tbv report button
 def toggle_state10(): # this will renable tbd report button
     Gui.getTBDdoc.config(state="normal")
 
-def toggle_state13(): # this will renable treeview button
+def toggle_state11(): # this will renable treeview button
     Gui.TreeDiagram.config(state="normal")
 
 #def check_string(string1, string2): # checks if a string1 is in string2
@@ -1734,12 +1635,12 @@ def remove_empty_values(d):
 
 
 
-def createExcel3():
+def createExcel2():
     
     global wb3
     wb3 = xw.Book()
     excelReport3 = wb3.sheets[0]
-    excelReport3.name = "ReportNew"
+    excelReport3.name = "Tag Relation Diagram Report"
 
     # Adding First Generation Tags header
     excelReport3.range("A1").value = 'First Generation'
@@ -1813,7 +1714,7 @@ def createExcel3():
     for orpha in orphanChildren2Copy:
         if orpha != orphanChildren2Copy[0]:
             cell10 = str('A'+ str(counter1-1))
-            excelReport3.range(cell10).value = 'SEPERATOR'
+            excelReport3.range(cell10).value = 'SEPARATOR'
             excelReport3.range(cell10).font.Size = 14 # Change font size
             excelReport3.range(cell10).font.ColorIndex = 2 # Change font color
             cell11 = str(str(cell10) + ':G' + str(counter1-1))
@@ -2003,7 +1904,7 @@ def createExcel3():
     #print("parent",hx)
     #print("keys2", keys)
     excelReport3.autofit()
-    wb3.save('excelNew.xlsx') # Saving excel report as 'AllTags.xlsx'
+    wb3.save('Tags_DiagramTree.xlsx') # Saving excel report as 'AllTags.xlsx'
 
 
 def guiTree():

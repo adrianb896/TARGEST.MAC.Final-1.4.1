@@ -1,3 +1,0 @@
-([('main',
-   '/Users/auhaug/Downloads/TARGEST.MAC.Final-1.2--main/dist/main',
-   'EXECUTABLE')],)

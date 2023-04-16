@@ -91,7 +91,7 @@ def GUI1():
 
         # button 4
         global getDoc
-        getDoc = ttk.Button(window, text="Open Child and Parent Tags Report", state= DISABLED, command=Targest2.getDocument, width = 30)
+        getDoc = ttk.Button(window, text="Open Child & Parent Tags Report", state= DISABLED, command=Targest2.getDocument, width = 30)
         getDoc.place(x=620, y=35)
 
         # button 5
@@ -116,17 +116,13 @@ def GUI1():
 
         # button 9
         global getExcel
-        getExcel = ttk.Button(text="Open Tags and Requirements Excel Report", state= DISABLED, command=Targest2.createExcel, width = 30)
+        getExcel = ttk.Button(text="Open Tags & Requirements Excel Report", state= DISABLED, command=Targest2.createExcel, width = 30)
         getExcel.place(x=620, y=160)
 
-        # button 10
-        #global getExcel2
-        #getExcel2 = ttk.Button(text="Open All Tags Excel Report", state= DISABLED, command=Targest2.createExcel2, width = 30)
-        #getExcel2.place(x=620, y=185)
 
         # button 10
         global getExcel2
-        getExcel2 = ttk.Button(text="Open Relationship Trees Excel Report", state= DISABLED, command=Targest2.createExcel3, width = 30)
+        getExcel2 = ttk.Button(text="Open Relationship Trees Excel Report", state= DISABLED, command=Targest2.createExcel2, width = 30)
         getExcel2.place(x=620, y=185)
         
         # button 10

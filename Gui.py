@@ -42,17 +42,18 @@ def GUI1():
         window = Tk(className=' TARGEST v.1.4.0 ')
         # set window size #
         window.geometry("1000x750")
+        window['background']='#009ce8'
 
-        canvas = Canvas(window, width=1000, height=750)
-        canvas.pack()
+        # canvas = Canvas(window, width=1000, height=750)
+        # canvas.pack()
 
         # Create a horizontal gradient
-        for i in range(1000):
-            r = int(i/1000 * 152)
-            g = 75  # fixed green value
-            b = 255 - int(i/1000 * 108)
-            color = '#{:02x}{:02x}{:02x}'.format(r, g, b)
-            canvas.create_rectangle(i, 0, i+1, 1000, fill=color, outline='')
+        # for i in range(1000):
+        #     r = int(i/1000 * 152)
+        #     g = 75  # fixed green value
+        #     b = 255 - int(i/1000 * 108)
+        #     color = '#{:02x}{:02x}{:02x}'.format(r, g, b)
+        #     canvas.create_rectangle(i, 0, i+1, 1000, fill=color, outline='')
 
         icon = PhotoImage(file='TARGEST.png')
         window.iconphoto(True, icon)
@@ -87,48 +88,48 @@ def GUI1():
         # button 3
         global allTagsButton
         allTagsButton = ttk.Button(text="Open All Tags Table Report", state= DISABLED, command=Targest2.getDocumentTable, width = 30)
-        allTagsButton.place(x=620, y=10)
+        allTagsButton.place(x=630, y=10)
 
         # button 4
         global getDoc
         getDoc = ttk.Button(window, text="Open Child & Parent Tags Report", state= DISABLED, command=Targest2.getDocument, width = 30)
-        getDoc.place(x=620, y=35)
+        getDoc.place(x=630, y=35)
 
         # button 5
         global getOrphanDoc
         getOrphanDoc = ttk.Button(text="Open Orphan Tags Report", state= DISABLED, command=Targest2.getOrphanDocument, width = 30)
-        getOrphanDoc.place(x=620, y=60)
+        getOrphanDoc.place(x=630, y=60)
 
         # button 6
         global getChildlessDoc
         getChildlessDoc = ttk.Button(text="Open Childless Tags Report", state= DISABLED, command=Targest2.getChildlessDocument, width = 30)
-        getChildlessDoc.place(x=620, y=85)
+        getChildlessDoc.place(x=630, y=85)
 
         # button 7
         global getTBVdoc
         getTBVdoc = ttk.Button(text="Open TBV Word Report", state= DISABLED, command=Targest2.getTBV, width = 30)
-        getTBVdoc.place(x=620, y=110)
+        getTBVdoc.place(x=630, y=110)
 
         # button 8
         global getTBDdoc
         getTBDdoc = ttk.Button(text="Open TBD Word Report", state= DISABLED, command=Targest2.getTBD, width = 30)
-        getTBDdoc.place(x=620, y=135)
+        getTBDdoc.place(x=630, y=135)
 
         # button 9
         global getExcel
         getExcel = ttk.Button(text="Open Tags & Requirements Excel Report", state= DISABLED, command=Targest2.createExcel, width = 30)
-        getExcel.place(x=620, y=160)
+        getExcel.place(x=630, y=160)
 
 
         # button 10
         global getExcel2
         getExcel2 = ttk.Button(text="Open Relationship Trees Excel Report", state= DISABLED, command=Targest2.createExcel2, width = 30)
-        getExcel2.place(x=620, y=185)
+        getExcel2.place(x=630, y=185)
         
         # button 10
         global TreeDiagram
         TreeDiagram = ttk.Button(text="Create Family Trees", state= DISABLED, command =lambda: Targest.text3(window), width = 30)
-        TreeDiagram.place(x=620, y=210)
+        TreeDiagram.place(x=630, y=210)
 
         # button 11
         global Website

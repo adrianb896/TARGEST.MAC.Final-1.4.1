@@ -49,7 +49,6 @@ def GUI1():
 
         # Create a style for the widgets
         style = ttk.Style()
-        #style.configure('Emergency.TButton', font='helvetica 24', foreground='red', padding=10)
         style.configure("TButton", font=("Segoe UI", 10, "bold"), background="#b2d8ff", foreground="black")
 
          # button 1

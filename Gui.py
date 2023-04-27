@@ -39,7 +39,7 @@ def GUI1():
    
     try:
         # Creates the gui
-        window = Tk(className=' TARGEST v.1.4.0 ')
+        window = Tk(className=' TARGEST v.1.4.1 ')
         # set window size #
         window.geometry("1000x750")
         window['background']='#009ce8'
@@ -117,7 +117,7 @@ def GUI1():
         # Create a label for the developers
         labelDevs = Label(window, text="Developers:\nJan William Haug\nAdrian Bernardino\nStephania Rey", font=("Segoe UI", 10, "bold"), bg="#E5CCFF")
         labelDevs.place(x=690, y=670)
-        labelDevs.config(borderwidth=2, relief="groove", padx=10, pady=5, fg="black")
+        labelDevs.config(borderwidth=2, relief="groove", padx=15, pady=5, fg="black")
         
 
         # Create ScrolledText widget
@@ -133,7 +133,15 @@ def GUI1():
         label2 = Label(window, image=imageLogo)
         label2.place(x=25, y=10)
 
-        
+        # Load the copy right image file
+        global imageCopyRight
+        imageCopyRight = PhotoImage(file="copyright.png")
+
+        # Create a label to display the image
+        label3 = Label(window, image=imageCopyRight)
+        label3.place(x=692, y=674)
+        label3.config(bg="#E5CCFF")
+
         msg3 = ('You need a text file with paths to your documents\n 1. Please choose your documents by clicking on \n    the "Choose list of Documents" button.\n 2. Once the documents are displayed, Click "Generate Reports"\n\n')
         Txt.insert(tk.END, msg3) #print in GUI
 

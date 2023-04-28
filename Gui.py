@@ -175,6 +175,10 @@ def GUI1():
 
         dropdown = OptionMenu(window, selected_option, *options, command=selection_changed)
         dropdown.place(x=566, y=46)
+                # Configure dropdown style
+        dropdown["menu"].configure(font=("Segoe UI", 10, "bold"), background="#b2d8ff", foreground="black")
+        dropdown["highlightthickness"] = 0
+        dropdown.configure(font=("Segoe UI", 10, "bold"), background="#b2d8ff", foreground="black")
 
     except Exception as e:
         # Log an error message
